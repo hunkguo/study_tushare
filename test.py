@@ -17,13 +17,22 @@ class stock:
         # 初始化
         pro = ts.pro_api('ee53f45bc754c9f7a79c1f5ba5416c6e9dfe15d554ac570a0731233b')
         
-        # 获取所属行业
-        df_stock_in_index_member = pro.index_member(ts_code='600000.SH')
+        # 获取所属行业,最后一个
+        df_stock_in_index_member = pro.index_member(ts_code='600000.SH').tail(1)
+        #print(df_stock_in_index_member.values[0][0])
         
-        for index_member in df_stock_in_index_member.iterrows():
-            #获取分类的成份股
-            df_index_member = pro.index_member(index_code='850531.SI', fields='index_code, con_code, in_date')
-            print(df_index_member)
+        #获取分类的成份股
+        df_index_member = pro.index_member(index_code=df_stock_in_index_member.values[0][0], fields='index_code, con_code, in_date')
+        #print(df_index_member)
+        
+        for index_member_stock in df_index_member.iterrows():
+            #balancesheet
+            print(index_member_stock[1]['con_code'])
+            stock_code = index_member_stock[1]['con_code']
+            stock_balancesheet = pro.balancesheet(ts_code=stock_code)
+            # 资产总计
+            print(stock_balancesheet.head(1)['total_assets'])
+            break
         
 
 
