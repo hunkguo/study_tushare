@@ -8,6 +8,8 @@ import tushare as ts
 import numpy as np
 import pandas as pd
 
+
+# 以股票找信息
 class stock:
     def __init__ (self):
         #self.pro = ts.pro_api('ee53f45bc754c9f7a79c1f5ba5416c6e9dfe15d554ac570a0731233b')
@@ -34,10 +36,22 @@ class stock:
             print(stock_balancesheet.head(1)['total_assets'])
             break
         
+class index:
+    def init(self):
+        pass
+    
+    def run(self):
+        # 初始化
+        pro = ts.pro_api('ee53f45bc754c9f7a79c1f5ba5416c6e9dfe15d554ac570a0731233b')
+
+        # 指数
+        # df_index = pro.index_basic(market='CSI', category='主题指数')
+        df_index = pro.index_dailybasic(trade_date='20191213', fields='ts_code,trade_date,turnover_rate,pe')
+        print(df_index)
 
 
 if __name__ == "__main__":
     
-    s = stock()
+    s = index()
     s.run()
     #print('开始交易日为：%s ;结束交易日为：%s ' % (start_date_open, end_date_open))
