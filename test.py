@@ -12,12 +12,11 @@ import pandas as pd
 # 以股票找信息
 class stock:
     def __init__ (self):
-        #self.pro = ts.pro_api('ee53f45bc754c9f7a79c1f5ba5416c6e9dfe15d554ac570a0731233b')
         pass
 
     def run(self):
         # 初始化
-        pro = ts.pro_api('ee53f45bc754c9f7a79c1f5ba5416c6e9dfe15d554ac570a0731233b')
+        pro = ts.pro_api('***')
         
         # 获取所属行业,最后一个
         df_stock_in_index_member = pro.index_member(ts_code='600000.SH').tail(1)
